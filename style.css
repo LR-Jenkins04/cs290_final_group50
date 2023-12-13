@@ -17,9 +17,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f5f5; /* Light blue-gray background color */
   }
   
+  .background { 
+    background-image: url(/backgrounds/clear.png);
+    background-size: cover;
+  }
+
   .weather-card {
     background-color: #fff;
     border-radius: 8px;

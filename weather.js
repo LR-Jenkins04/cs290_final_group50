@@ -33,6 +33,7 @@ let weather = {
         const { temp, humidity } = data.main;
         const { speed } = data.wind;
         const { description } = data.weather[0];
+	const { id } = data.weather[0];
 
         document.querySelector(".city").innerText = "Weather in " + name;
         document.querySelector(".temp").innerText = temp + "°C";
@@ -43,6 +44,7 @@ let weather = {
         document.querySelector(".description").innerText =
             "Description: " + description;
         document.querySelector(".weather-details").classList.remove("loading");
+	background(id);
     },
     search: function () {
         this.fetchWeather(document.querySelector(".search-bar").value);
@@ -84,6 +86,33 @@ let weather = {
   
 };
 
+function background(id){
+	
+	if(id > 599 && id < 623){
+	//display snow.png
+	//below is attempted code, ite returns an error
+	document.getElementsByClassName('background').background-image == "/backgrounds/snow.png";
+	} else if( id > 199 && id < 233){
+	//display thunder.png
+
+	} else if( (id > 299 && id < 532) || id == 701){
+	//display rain.png
+
+	} else if( id > 800 && id < 805){
+	//display cloudy.png
+
+	} else if(id == 711){
+	//display smoke.png
+	
+	} else if(id == 741){
+	//display fog.png
+	
+	} else{
+	//display clear.png
+	
+	}
+	
+};
 document.querySelector(".search-button").addEventListener("click", function () {
     weather.search();
 });
