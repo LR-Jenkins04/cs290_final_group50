@@ -1,5 +1,5 @@
 # Weather App - CS290 Final Project - Group 50
-Authors: Soham Das, Michael Balzer<group members, add names here for credit>
+Authors: Soham Das, Michael Balzer, America Pacheco
 
 The Weather App is a web application that allows users to check the current weather conditions and local time for a specific city.
 
