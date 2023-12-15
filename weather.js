@@ -87,31 +87,30 @@ let weather = {
 };
 
 function background(id){
-	
+	console.log("weather ID is: ", id);
+        var background = document.querySelector(".backgroundContainer");
 	if(id > 599 && id < 623){
 	//display snow.png
-	//below is attempted code, ite returns an error
-	document.getElementsByClassName('background').background-image == "/backgrounds/snow.png";
+	background.style.backgroundImage = 'url("/backgrounds/snow.png")';
 	} else if( id > 199 && id < 233){
 	//display thunder.png
-
+	background.style.backgroundImage = 'url("/backgrounds/thunder.png")';
 	} else if( (id > 299 && id < 532) || id == 701){
 	//display rain.png
-
+	background.style.backgroundImage = 'url("/backgrounds/rain.png")';
 	} else if( id > 800 && id < 805){
 	//display cloudy.png
-
+	background.style.backgroundImage = 'url("/backgrounds/cloudy.png")';
 	} else if(id == 711){
 	//display smoke.png
-	
+	background.style.backgroundImage = 'url("/backgrounds/smoke.png")';
 	} else if(id == 741){
 	//display fog.png
-	
+	background.style.backgroundImage = 'url("/backgrounds/fog.png")';
 	} else{
 	//display clear.png
-	
+	background.style.backgroundImage = 'url("/backgrounds/clear.png")';
 	}
-	
 };
 document.querySelector(".search-button").addEventListener("click", function () {
     weather.search();
