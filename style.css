@@ -6,9 +6,15 @@
   text-align: center;
   color: #000000;
   position: absolute;
-  top: 120px;
+  top: 0px;
   
   z-index: 2; 
+}
+
+@media (max-width: 1400px) or (max-height: 800px) {
+  .title {
+      display: none;
+  }
 }
 .time {
     position: relative;
