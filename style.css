@@ -17,10 +17,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    transition: background-image 0.5s ease;
+    transition: background-image 0.5s ease-in;
   }
   
   .backgroundContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     background-image: url(/backgrounds/clear.png);
@@ -30,7 +33,8 @@ body {
     justify-content: center;
     align-items: center;
     transition: background-image 1s ease;
-  }
+}
+
 
   .weather-card {
     background-color: #fff;
@@ -66,9 +70,9 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  /* Adjust the size of the magnifying glass icon */
+
   .search-button i {
-    font-size: 1.2em; /* Adjust the size as needed */
+    font-size: 1.2em; 
   }
   
   .search-button:hover {
@@ -113,8 +117,5 @@ body {
     margin-bottom: 10px;
   }
   
-  .loading {
-    opacity: 0.7;
-    /* Add a loading indicator style, e.g., a spinner animation */
-  }
+
   
