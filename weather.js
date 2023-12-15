@@ -1,5 +1,6 @@
 let currentCity = '';
-let isCelsius = false; 
+let isCelsius = false;
+let bookmarks = [];
 
 let weather = {
     apiKey: "46bad1ae254ac2b5233c60e46e28157f",
@@ -43,6 +44,9 @@ let weather = {
         document.querySelector(".description").innerText = "Description: " + description;
         document.querySelector(".weather-details").classList.remove("loading");
         background(id);
+
+        // Update the bookmark button text
+        this.updateBookmarkButton();
     },
     search: function () {
         this.fetchWeather(document.querySelector(".search-bar").value);
@@ -82,10 +86,130 @@ let weather = {
             console.error('Error fetching time:', error.message);
             return null;
         }
-    }
+    },
+
+    addBookmark: function () {
+        if (currentCity && !bookmarks.includes(currentCity)) {
+            bookmarks.push(currentCity);
+            this.updateBookmarkButton();
+            this.saveBookmarks();
+            updateBookmarksDropdown();
+        }
+    },
+    removeBookmark: function (city) {
+        const index = bookmarks.indexOf(city);
+        if (index !== -1) {
+            bookmarks.splice(index, 1);
+            this.updateBookmarkButton();
+            this.saveBookmarks();
+            updateBookmarksDropdown();
+        }
+    
+       
+        fetch('/bookmarks', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ city: city }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to remove bookmark on the server.');
+            }
+            return response.text();
+        })
+        .then(message => console.log(message))
+        .catch(error => console.error('Error removing bookmark:', error));
+    },
+    
+    toggleBookmark: function (city) {
+      
+        const cityIndex = bookmarks.indexOf(city);
+    
+        if (cityIndex !== -1) {
+           
+            this.removeBookmark(city);
+            console.log(`${city} removed from bookmarks.`);
+        } else {
+           
+            bookmarks.push(city);
+            this.updateBookmarkButton();
+            this.saveBookmarks();
+            updateBookmarksDropdown(); 
+            console.log(`${city} added to bookmarks.`);
+        }
+    },
+    
+    updateBookmarkButton: function () {
+        const bookmarkButton = document.querySelector(".bookmark-button");
+        if (currentCity && bookmarks.includes(currentCity)) {
+            bookmarkButton.innerText = "Unbookmark";
+        } else {
+            bookmarkButton.innerText = "Bookmark";
+        }
+        updateBookmarksDropdown();
+    },
+    saveBookmarks: function () {
+        // Save the bookmarks array to the server
+        fetch('/bookmarks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({city: currentCity}),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update bookmarks on the server.');
+            }
+        })
+        .catch(error => console.error('Error updating bookmarks:', error));
+        
+    },
+
+   
+
+    addBookmark: function () {
+        if (currentCity && !bookmarks.includes(currentCity)) {
+            bookmarks.push(currentCity);
+            this.updateBookmarkButton();
+            this.saveBookmarks();
+            updateBookmarksDropdown(); // Call the function after adding a bookmark
+        }
+    },
+    
+    
+
+
+
 };
 
-// Function to update background based on weather ID
+function updateBookmarksDropdown(bookmarks) {
+    const bookmarksDropdown = document.getElementById('bookmarksDropdown');
+    bookmarksDropdown.innerHTML = ''; // Clear previous content
+
+    if (!bookmarks || bookmarks.length === 0) {
+        const noBookmarksItem = document.createElement('div');
+        noBookmarksItem.classList.add('dropdown-item');
+        noBookmarksItem.innerText = 'No bookmarks yet!';
+        bookmarksDropdown.appendChild(noBookmarksItem);
+    } else {
+        bookmarks.forEach(city => {
+            const dropdownItem = document.createElement('div');
+            dropdownItem.classList.add('dropdown-item');
+            dropdownItem.innerText = city;
+            dropdownItem.addEventListener('click', () => {
+                // When a city is clicked, fetch its weather
+                weather.fetchWeather(city);
+            });
+            bookmarksDropdown.appendChild(dropdownItem);
+        });
+    }
+}
+
+
+// Function to update background based on weather ID 
 function background(id) {
     console.log("weather ID is: ", id);
     var background = document.querySelector(".backgroundContainer");
@@ -113,6 +237,24 @@ function background(id) {
     }
 };
 
+
+function fetchAndUpdateBookmarks() {
+    fetch('/bookmarks')
+        .then(response => response.json())
+        .then(bookmarks => {
+            updateBookmarksDropdown(bookmarks);
+        })
+        .catch(error => console.error('Error fetching bookmarks:', error));
+}
+
+// Fetch and update bookmarks on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAndUpdateBookmarks();
+
+    // Set up an interval to fetch and update bookmarks every 5 seconds (adjust as needed)
+    setInterval(fetchAndUpdateBookmarks, 1000); // 5000 milliseconds = 5 seconds
+});
+
 // Event listener for search button click
 document.querySelector(".search-button").addEventListener("click", function () {
     weather.search();
@@ -129,7 +271,15 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
 document.getElementById('temperature-toggle').addEventListener('change', function () {
     isCelsius = this.checked;
 
-    if(currentCity){
+    if (currentCity) {
         weather.fetchWeather(currentCity);
     }
 });
+
+// Event listener for bookmark button click
+document.querySelector(".bookmark-button").addEventListener("click", function () {
+
+    weather.toggleBookmark(currentCity);
+    console.log(bookmarks);
+});
+

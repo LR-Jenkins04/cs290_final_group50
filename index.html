@@ -13,32 +13,39 @@
 </head>
 
 <body>
- <div class="backgroundContainer">
-  <div class="weather-card">
-    <div class="time" id="time"></div>
+  <div class="title">Weather App!</div>
+  <div class="backgroundContainer">
+    <div class="weather-card">
+      <div class="time" id="time"></div>
 
+      <div class="temperature-switch">
+        <label for="temperature-toggle"></label>
+        <input type="checkbox" id="temperature-toggle">
+        <label for="temperature-toggle">°C</label>
+      </div>
 
-    <div class="temperature-switch">
-      <label for="temperature-toggle"></label>
-      <input type="checkbox" id="temperature-toggle">
-      <label for="temperature-toggle">°C</label>
+      <div class="search-bar-container">
+        <input type="text" class="search-bar" placeholder="Enter city name...">
+        <button class="search-button">
+          <i class="material-icons">search</i>
+        </button>
+      </div>
+      <div class="weather-details loading">
+        <h2 class="city"></h2>
+        <h1 class="temp"></h1>
+        <div class="humidity"></div>
+        <div class="wind"></div>
+        <div class="description"></div>
+        <button class="bookmark-button">Bookmark</button>
+      </div>
     </div>
-
-    <div class="search-bar-container">
-      <input type="text" class="search-bar" placeholder="Type city here">
-      <button class="search-button">
-        <i class="material-icons">search</i>
-      </button>
-    </div>
-    <div class="weather-details loading">
-      <h2 class="city"></h2>
-      <h1 class="temp"></h1>
-      <div class="humidity"></div>
-      <div class="wind"></div>
-      <div class="description"></div>
+    <div class="bookmarks-container top-left">
+      <div class="dropdown">
+        <button class="dropbtn">Bookmarks</button>
+        <div class="dropdown-content" id="bookmarksDropdown"></div>
+      </div>
     </div>
   </div>
- </div>
 </body>
 
 </html>
