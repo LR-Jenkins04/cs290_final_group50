@@ -43,9 +43,9 @@ The Weather App is a web application that allows users to check the current weat
 - **style.css:** The CSS file for styling the web page.
 - **weather.js:** The JavaScript file responsible for fetching and displaying weather information.
 - **README.md:** The documentation file providing information about the application.
-- **server.js** The JavaScript file responsible for dynamically updating and storing data.
-- **bookmarks.json** The JSON file that holds the user's bookmarks data.
-- **backgrounds** A directory that holds the dynamically updating background image.
+- **server.js:** The JavaScript file responsible for dynamically updating and storing data.
+- **bookmarks.json:** The JSON file that holds the user's bookmarks data.
+- **backgrounds:** A directory that holds the dynamically updating background image.
 
 ## Styling
 
