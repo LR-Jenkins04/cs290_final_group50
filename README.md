@@ -1,5 +1,5 @@
 # Weather App - CS290 Final Project - Group 50
-Authors: Soham Das, <group members, add names here for credit>
+Authors: Soham Das, Michael Balzer<group members, add names here for credit>
 
 The Weather App is a web application that allows users to check the current weather conditions and local time for a specific city.
 
@@ -8,6 +8,7 @@ The Weather App is a web application that allows users to check the current weat
 - **Weather Information:** Provides real-time weather data, including temperature, humidity, and wind speed.
 - **Search Functionality:** Users can search for the weather of any city around the world.
 - **Timezone Information:** Displays the local time of the searched city.
+- **Dynamic Background Art:** Dynamically displays the background art to match the weather in the searched location
 
 ## Technologies Used
 
@@ -51,7 +52,6 @@ No external libraries or frameworks are used in this application. The weather da
 
 - Add icons or images to represent different weather conditions.
 - Enhance the styling for a more polished look.
-- Implement dynamic background changes depending on the weather description.
 
 ## Credits
 
